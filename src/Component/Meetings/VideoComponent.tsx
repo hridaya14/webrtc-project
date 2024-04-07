@@ -16,9 +16,7 @@ export default function VideoComponent({params} : {params : {channel : string , 
     const { isLoading: isLoadingMic, localMicrophoneTrack } = useLocalMicrophoneTrack();
     const { isLoading: isLoadingCam, localCameraTrack } = useLocalCameraTrack();
 
-    if (isLoadingMic || isLoadingCam) {
-        return <div>Loading...</div>;
-    }
+    
 
     if (localMicrophoneTrack && !params.audioEnable) {
         localMicrophoneTrack.setMuted(false);
@@ -39,7 +37,9 @@ export default function VideoComponent({params} : {params : {channel : string , 
     
     
 
-
+    if (isLoadingMic || isLoadingCam) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className=" h-full flex justify-center">

@@ -99,7 +99,7 @@ const UserProfile = ({ avatar, email }: { avatar: string; email: string }) => {
                                     <label htmlFor="audioDevice" className="">Select Audio Device</label>
                                     <select name="audioDevice" id="audioDevice" className="p-3 rounded-full text-black ">
                                         {audioDevices.map((device) => (
-                                            <option value={device} className="overflow-hidden" onClick={() => setAudioDevice(device)}>{device}</option>
+                                            <option value={device} className="overflow-hidden" key={device} onClick={() => setAudioDevice(device)}>{device}</option>
                                         ))}
                                     </select>  
                                 </div>
@@ -112,7 +112,7 @@ const UserProfile = ({ avatar, email }: { avatar: string; email: string }) => {
                                 <label htmlFor="videoDevice">Select Video Device</label>
                                 <select name="videoDevice" id="videoDevice" className="p-3 rounded-full text-black">
                                     {videoDevices.map((device) => (
-                                        <option value={device} className="overflow-hidden" onClick={() => setVideoDevice(device)}>{device}</option>
+                                        <option value={device} className="overflow-hidden" key = {device} onClick={() => setVideoDevice(device)}>{device}</option>
                                     ))}
                                 </select>
                                 </div>
