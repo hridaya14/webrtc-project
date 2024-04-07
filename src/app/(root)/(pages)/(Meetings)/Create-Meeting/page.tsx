@@ -4,6 +4,7 @@ import { Models } from "appwrite";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { redirect } from "next/navigation";
+import axios from "axios";
 
 function generateRandomChannelName() {
     const getRandomChar = () => {
@@ -36,28 +37,18 @@ export default function Create() {
                 const channelName = generateRandomChannelName();
                 setChannel(channelName);
 
-                const response = await fetch('https://agora-token-server-klgt.onrender.com/getToken', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        "tokenType": "rtc",
-                        "channel": channelName,
-                        "role": "publisher",
-                        "uid": userData.$id,
-                        "expire": 3600
-                    })
+                const response = await axios.post('https://agora-token-server-klgt.onrender.com/getToken',{
+                    "tokenType": "rtc",
+                    "channel": channelName,
+                    "role": "publisher",
+                    "uid": userData.$id,
+                    "expire": 3600
                 });
 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch token');
-                }
 
-                const data = await response.json();
-                setToken(data.token);
+                setToken(response.data.token);
 
-                redirect(`/Call/${channelName}/${data.token}`);
+                redirect(`/Call/${channelName}/${token}`);
             } catch (error) {
                 console.error('Error:', error);
             }
