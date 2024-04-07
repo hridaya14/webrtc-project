@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const MeetingCard = () => {
@@ -9,12 +10,12 @@ const MeetingCard = () => {
             </span>
             <div className="flex flex-col md:flex-row gap-2 max-sm:items-start items-center">
                 <Link href = "/Create-Meeting" className=" flex items-center bg-[#2074EC] p-2 gap-2">
-                    <img src = "/camera.svg" alt="camera" className=" w-6 h-6"/>
+                    <Image src = "/camera.svg" alt="camera" height={24} width={24}></Image>
                     <h3 className=" text-2xl">New Meeting</h3>
                 </Link>
                 <div className="items-center flex space-x-2">
                     <span className="flex bg-[#1C1F2E] p-2 gap-2 items-center w-72">
-                        <img src = "/keyboard.svg" alt="camera" className=" w-6 h-6"/>
+                        <Image src = "/keyboard.svg" alt="camera" height={24} width={24}></Image>
                         <input className=" text-2xl text-white font-semibold bg-transparent" placeholder="Enter a code or link"></input>
                     </span>
                     <span>

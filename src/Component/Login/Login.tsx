@@ -30,7 +30,7 @@ export default function Login() {
       <LoginForm />
       <div className=" text-end w-full">
         <p className="text-center text-gray-500 text-sm">
-          Don't Have an Account? <Link href = "/Signup">Register</Link>
+          Dont Have an Account? <Link href = "/Signup">Register</Link>
         </p>
       </div>
       <div className="flex justify-center gap-8 w-full">
