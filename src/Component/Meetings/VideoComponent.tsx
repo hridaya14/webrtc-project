@@ -42,8 +42,11 @@ export default function VideoComponent({params} : {params : {channel : string , 
     }
 
     return (
-        <div className=" h-full flex justify-center">
-            
+        <div className=" h-96 w-96 my-auto flex justify-center">
+            <LocalVideoTrack
+          track={localCameraTrack}
+          play={true}
+        />
         </div>
     );
 }
