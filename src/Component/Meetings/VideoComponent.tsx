@@ -28,12 +28,14 @@ export default function VideoComponent({params} : {params : {channel : string , 
         localCameraTrack.setMuted(false);
     }
 
-    usePublish([localMicrophoneTrack, localCameraTrack]);
+    
     useJoin({
         appid: config.App_ID,
         channel: params.channel,
         token: params.token,
     });
+
+    usePublish([localMicrophoneTrack, localCameraTrack]);
     
     
 
