@@ -37,13 +37,21 @@ export default function Create() {
                 const channelName = generateRandomChannelName();
                 setChannel(channelName);
 
+                let config = {
+                    headers: {
+                      "Content-Type": "application/json",
+                      'Access-Control-Allow-Origin': '*',
+                      'cors' : 'cors'
+                      }
+                    }
+
                 const response = await axios.post('https://agora-token-server-klgt.onrender.com/getToken',{
                     "tokenType": "rtc",
                     "channel": channelName,
                     "role": "publisher",
                     "uid": userData.$id,
                     "expire": 3600
-                });
+                },config);
 
 
                 setToken(response.data.token);
