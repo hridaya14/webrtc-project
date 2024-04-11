@@ -1,11 +1,12 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const MeetingCard = () => {
     const[meetingCode, setMeetingCode] = useState("")
+    const router = useRouter();
     return (
         <div className="flex flex-col space-y-12 lg:w-1/2">
             <span className="space-y-6">
@@ -23,7 +24,7 @@ const MeetingCard = () => {
                         <input className=" text-2xl text-white font-semibold bg-transparent" onChange={(e)=> {setMeetingCode(e.target.value)} } placeholder="Enter a code or link"></input>
                     </span>
                     <span>
-                        <button onClick={() => {redirect(`/Call/${meetingCode}`)}}>Join</button>
+                        <button onClick={() => {router.push(`/Call/${meetingCode}`)}}>Join</button>
                     </span>
                 </div>
             </div>
