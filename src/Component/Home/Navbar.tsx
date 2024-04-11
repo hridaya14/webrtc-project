@@ -13,7 +13,7 @@ const Navbar = () => {
         account.get().then((user) => setEmail(user.email))
     }, [])
   return (
-    <div className=" text-white bg-[#1C1F2E] p-4 w-full flex justify-between items-center h-24">
+    <div className=" text-white bg-[#1C1F2E] p-4 w-screen flex justify-between items-center h-24">
       <span>
         <Image
           src="/logo-no-background.svg"

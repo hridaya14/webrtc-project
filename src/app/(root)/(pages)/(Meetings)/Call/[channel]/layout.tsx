@@ -11,7 +11,7 @@ const CallLayout = ({ children }: { children: React.ReactNode }) => {
   );
 
   return (
-    <main className=" h-screen bg-black ">
+    <main className=" h-screen overflow-hidden bg-black ">
       <AgoraRTCProvider client={client}>{children}</AgoraRTCProvider>
     </main>
   );

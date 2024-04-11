@@ -7,7 +7,7 @@ const HomeLayout = ({
     children: React.ReactNode
   }) => {
     return (
-        <main className=" h-screen ">
+        <main className=" md:h-screen md:overflow-hidden ">
             <Navbar/>
             <section className="flex">
             <Sidebar/>

@@ -4,49 +4,97 @@ import {
     LocalVideoTrack,
     RemoteUser,
     RemoteVideoTrack,
+    ClientRole,  
     useJoin,
     useLocalCameraTrack,
     useLocalMicrophoneTrack,
     usePublish,
     useRemoteUsers,
+    IAgoraRTCRemoteUser,
+    useRemoteAudioTracks,
 } from "agora-rtc-react";
+import { useEffect } from "react";
 
-export default function VideoComponent({params} : {params : {channel : string , token : string , audioEnable : boolean , videoEnable : boolean}}) {
+export default function VideoComponent(props : {channel : string , token : string , uid : string ,  audioEnable : boolean , videoEnable : boolean}) {
 
     const { isLoading: isLoadingMic, localMicrophoneTrack } = useLocalMicrophoneTrack();
     const { isLoading: isLoadingCam, localCameraTrack } = useLocalCameraTrack();
+    const remoteUsers = useRemoteUsers();
+    const { audioTracks } = useRemoteAudioTracks(remoteUsers);
+    audioTracks.map((track) => track.play());
 
-    
+    useEffect(() => {
+        if (props.audioEnable) {
+            localMicrophoneTrack?.setEnabled(true);
+        } else {
+            localMicrophoneTrack?.setEnabled(false);
+        }
+        if (props.videoEnable) {
+            localCameraTrack?.setEnabled(true);
+        } else {
+            localCameraTrack?.setEnabled(false);
+        }
+    }, [props.audioEnable, props.videoEnable]);
 
-    if (localMicrophoneTrack && !params.audioEnable) {
-        localMicrophoneTrack.setMuted(false);
-    }
-
-    if (localCameraTrack && !params.videoEnable) {
-        localCameraTrack.setMuted(false);
-    }
+    useEffect(() => {
+        return () => {
+            localCameraTrack?.close();
+            localMicrophoneTrack?.close();
+        };
+    }, []);
 
     
     useJoin({
         appid: config.App_ID,
-        channel: params.channel,
-        token: params.token,
+        channel: props.channel,
+        token: props.token,
+        uid : props.uid
     });
 
     usePublish([localMicrophoneTrack, localCameraTrack]);
     
-    
+   
 
     if (isLoadingMic || isLoadingCam) {
         return <div>Loading...</div>;
     }
 
-    return (
-        <div className=" h-96 w-96 my-auto flex justify-center">
-            <LocalVideoTrack
-          track={localCameraTrack}
-          play={true}
-        />
+    if(remoteUsers.length == 0){
+        return(
+            <div className="h-full w-full">
+                <LocalVideoTrack track={localCameraTrack} play = {true} className=" px-4 w-full xl:max-w-xl xl:mx-auto h-full py-4 rounded-lg" />
+            </div>
+        )
+    }
+
+
+    const unit = "minmax(0, 1fr)";
+
+
+    return(
+        <div className=" h-full relative">
+            <div className="h-52 w-52 absolute bottom-4 right-4">
+                <LocalVideoTrack track={localCameraTrack} play = {true}/>
+            </div>
+        
+        <div className={`grid  gap-1 flex-1`} style={{
+            gridTemplateColumns:
+                remoteUsers.length > 9
+                ? unit.repeat(4)
+                : remoteUsers.length > 4
+                ? unit.repeat(3)
+                : remoteUsers.length > 1
+                ? unit.repeat(2)
+                : unit,
+        }}>
+            {remoteUsers.map((remoteUser) => (
+                    <div className="vid rounded-lg" style={{ height: 400, width: 600 }} key={remoteUser.uid}>
+                        <RemoteUser user={remoteUser} playVideo={true} playAudio={true} />
+                    </div>
+                ))}
+           </div>
+            
         </div>
-    );
+    )
+    
 }
