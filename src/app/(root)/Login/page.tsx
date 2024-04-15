@@ -2,7 +2,7 @@
 import useAuth from "@/context/useAuth";
 import { useRouter } from "next/navigation";
 import React from "react";
-import Login from "@/Component/Login/Login";
+import Login from "@/components/custom/Login/Login";
 
 const LoginPage = () => {
     const router = useRouter();

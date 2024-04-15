@@ -4,11 +4,12 @@ import { Separator } from "@/components/ui/separator";
 import dynamic from "next/dynamic";
 import { account } from "@/appwrite/config";
 import axios from "axios";
-import { Loading } from "@/Component/Loading";
+import { Loading } from "@/components/custom/Loading";
 import { Models } from "appwrite";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
-const VideoComponent = dynamic(() => import("@/Component/Meetings/VideoComponent"),{ssr:false});
+import { cn } from "@/lib/utils";
+const VideoComponent = dynamic(() => import("@/components/custom/Meetings/VideoComponent"),{ssr:false});
 
 export default function Call({
   params,
@@ -114,11 +115,11 @@ export default function Call({
           <h2 className="text-white text-2xl">{params.channel}</h2>
         </div>
         <div className="flex gap-2 md:pr-8">
-          <button className="p-2 footer-button " onClick={ toggleAudio}>
-            <img src="/footer/mic-on.png"></img>
+          <button className={cn("p-2 footer-button",{"footer-off" : !isAudioEnable})} onClick={ toggleAudio}>
+            <img src={isAudioEnable ? "/footer/mic-on.png" : "/footer/mic-off.png"}></img>
           </button>
-          <button className="p-2 footer-button" onClick={ toggleVideo}>
-            <img src="/footer/video-on.png"></img>
+          <button className={cn("p-2 footer-button",{"footer-off" : !isVideoEnable})} onClick={ toggleVideo}>
+            <img src={isVideoEnable ? "/footer/video-on.png" : "/footer/video-off.png"}></img>
           </button>
           <button className=" p-2 bg-red-800 footer-button" onClick={() => {router.push("/")}}>
             <img src="/footer/exit.png"></img>

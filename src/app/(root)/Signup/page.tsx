@@ -2,7 +2,7 @@
 import useAuth from "@/context/useAuth";
 import { useRouter } from "next/navigation";
 import React from "react";
-import Signup from "@/Component/Signup/Signup";
+import Signup from "@/components/custom/Signup/Signup";
 
 const SignupPage = () => {
     const router = useRouter();

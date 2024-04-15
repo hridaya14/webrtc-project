@@ -7,13 +7,26 @@ import UserProfile from "./UserProfile";
 const Navbar = () => {
     const [avatar , setAvatar] = useState<string>("")
     const [email , setEmail] = useState<string>("")
+    const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+
+    useEffect(() => {
+      const enumerateDevices = async () => {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        setDevices(devices);
+      };
+  
+      enumerateDevices();
+    }, []);
+
+
     useEffect(() => {
         const url = avatars.getInitials().toString()
         setAvatar(url)
         account.get().then((user) => setEmail(user.email))
     }, [])
+    
   return (
-    <div className=" text-white bg-[#1C1F2E] p-4 w-screen flex justify-between items-center h-24">
+    <nav className=" text-white bg-[#1C1F2E]  z-50 px-6 py-4 w-full flex justify-between items-center fixed">
       <span>
         <Image
           src="/logo-no-background.svg"
@@ -23,9 +36,9 @@ const Navbar = () => {
         ></Image>
       </span>
       <span>
-        <UserProfile avatar={avatar} email = {email}></UserProfile>
+        <UserProfile avatar={avatar} devices = {devices} email = {email}></UserProfile>
       </span>
-    </div>
+    </nav>
   );
 };
 export default Navbar;

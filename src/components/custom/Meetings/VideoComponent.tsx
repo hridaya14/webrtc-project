@@ -61,8 +61,8 @@ export default function VideoComponent(props : {channel : string , token : strin
 
     if(remoteUsers.length == 0){
         return(
-            <div className="h-full w-full">
-                <LocalVideoTrack track={localCameraTrack} play = {true} className=" px-4 w-full xl:max-w-xl xl:mx-auto h-full py-4 rounded-lg" />
+            <div className=" max-sm:h-[32rem] h-full w-full rounded-xl py-4 justify-center flex ">
+                <LocalVideoTrack track={localCameraTrack} play = {true} className="max-w-2xl h-full rounded-xl" />
             </div>
         )
     }

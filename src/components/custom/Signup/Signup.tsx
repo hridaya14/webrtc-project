@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import SignUp from "@/Component/Signup/form";
+import SignUp from "@/components/custom/Signup/form";
 import { account } from "@/appwrite/config"
 import { OAuthProvider } from "appwrite"
-import useAuth from "@/context/useAuth";
+
 
 
 export default function Signup(){

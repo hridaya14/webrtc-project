@@ -2,7 +2,7 @@
 import { AuthProvider } from "@/context/authContext";
 import React, { useEffect, useState } from "react";
 import { account } from  "@/appwrite/config";
-import { Loading } from "@/Component/Loading";
+import { Loading } from "@/components/custom/Loading";
 
 const ProtectedLayout = ({
   children,

@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { registerSchema } from "@/Component/Signup/schema";
+import { registerSchema } from "@/components/custom/Signup/schema";
 import { account } from "@/appwrite/config";
 import { ID } from "appwrite";
 import { Button } from "@/components/ui/button";
@@ -17,11 +17,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 
 
 const SignUpForm = () => {
+  const router = useRouter();
 
 
     const form = useForm<z.infer<typeof registerSchema>>({
@@ -42,7 +43,7 @@ const SignUpForm = () => {
             values.email,
             values.password,
             values.firstName + " " + values.lastName
-          ).then(() => redirect("/Login"));
+          ).then(() => router.push("/Login"));
         } catch (err) {
           console.error(err);
         }

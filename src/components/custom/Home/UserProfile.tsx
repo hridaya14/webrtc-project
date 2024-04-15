@@ -22,17 +22,29 @@ import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-const audioDevices = [ "Microphone 1", "Microphone 2", "Microphone 3", "Microphone 4", "Microphone 5"]
-const videoDevices = [ "Camera 1", "Camera 2", "Camera 3", "Camera 4", "Camera 5"]
 
-const UserProfile = ({ avatar, email }: { avatar: string; email: string }) => {
+
+const UserProfile = ({ avatar, email,devices }: { avatar: string; email: string , devices : MediaDeviceInfo[] }) => {
     const router = useRouter();
     const { setAuthStatus } = useAuth();
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [settingTab , setSettingTab] = useState<string>("audio")
-    const [audioDevice , setAudioDevice] = useState<string>("")
-    const [videoDevice , setVideoDevice] = useState<string>("")
+    const [audioDevice , setAudioDevice] = useState<string>()
+    const [videoDevice , setVideoDevice] = useState<string>()
 
+    const handleSetAudio = (id : string , name : string) => {
+        setAudioDevice(name)
+        navigator.mediaDevices.getUserMedia({ audio: { deviceId: id } });
+    };
+
+    const handleSetVideo = (id : string , name : string) => {
+      setAudioDevice(name)
+      navigator.mediaDevices.getUserMedia({ video: { deviceId: id } });
+};
+    
+
+    const audioDevices = devices?.filter((device) => device.kind === "audioinput")
+    const videoDevices = devices?.filter((device) => device.kind === "videoinput")
     const logout = () => {
         account
         .deleteSession("current")
@@ -99,7 +111,7 @@ const UserProfile = ({ avatar, email }: { avatar: string; email: string }) => {
                                     <label htmlFor="audioDevice" className="">Select Audio Device</label>
                                     <select name="audioDevice" id="audioDevice" className="p-3 rounded-full text-black ">
                                         {audioDevices.map((device) => (
-                                            <option value={device} className="overflow-hidden" key={device} onClick={() => setAudioDevice(device)}>{device}</option>
+                                            <option value={device.label} className="overflow-hidden" key={device.deviceId} onClick={ () => handleSetAudio(device.deviceId,device.label)}>{device.label}</option>
                                         ))}
                                     </select>  
                                 </div>
@@ -112,7 +124,7 @@ const UserProfile = ({ avatar, email }: { avatar: string; email: string }) => {
                                 <label htmlFor="videoDevice">Select Video Device</label>
                                 <select name="videoDevice" id="videoDevice" className="p-3 rounded-full text-black">
                                     {videoDevices.map((device) => (
-                                        <option value={device} className="overflow-hidden" key = {device} onClick={() => setVideoDevice(device)}>{device}</option>
+                                        <option value={device.label} className="overflow-hidden" key = {device.deviceId} onClick={() => handleSetVideo(device.deviceId,device.label)}>{device.label}</option>
                                     ))}
                                 </select>
                                 </div>

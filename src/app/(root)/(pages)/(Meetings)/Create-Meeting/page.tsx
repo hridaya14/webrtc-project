@@ -6,7 +6,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { redirect } from "next/navigation";
 
-function generateRandomChannelName() {
+
+export function generateRandomChannelName() {
     const getRandomChar = () => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         return characters.charAt(Math.floor(Math.random() * characters.length));

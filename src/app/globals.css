@@ -104,3 +104,13 @@ select:focus {
   border: 1px solid var(--Border-Bright, #252A33);
   border: 1px solid var(--Border-Bright, color(display-p3 0.1529 0.1647 0.1922));
 }
+
+.footer-off{
+  background: var(--Surface-Brighter, #2E303A);
+  background: var(--Surface-Brighter, color(display-p3 0.1804 0.1882 0.2196));
+}
+
+.upcoming-card{
+  border-radius: 0.875rem;
+  background: #1C1F2E;
+}
