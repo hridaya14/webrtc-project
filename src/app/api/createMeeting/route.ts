@@ -1,7 +1,7 @@
 
 import { config } from '@/conf/config';
 import { MongoClient, PushOperator } from 'mongodb';
-import { revalidatePath } from 'next/cache';
+
 
 
 type Meeting = {
@@ -38,11 +38,11 @@ export async function POST(request: Request) {
         const existingUser = await collection.findOne({ uid });
 
         if (existingUser) {
-            // @ts-ignore
             await collection.updateOne(
                 { uid },
-                { $push: { meetings : meeting } } 
-            ); 
+                { $addToSet: { meetings: meeting } } 
+            );
+            
             console.log("Meeting added to existing user's meetings");
         } else {
             

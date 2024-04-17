@@ -3,6 +3,8 @@ import { AuthProvider } from "@/context/authContext";
 import React, { useEffect, useState } from "react";
 import { account } from  "@/appwrite/config";
 import { Loading } from "@/components/custom/Loading";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 
 const ProtectedLayout = ({
   children,
@@ -25,7 +27,11 @@ const ProtectedLayout = ({
       {loader ? (
         <Loading />
       ) : (
-        <>{children}</>
+        <>
+        {children}
+        <SpeedInsights />
+        <Analytics />
+        </>
       )}
     </AuthProvider>
   );
