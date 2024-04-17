@@ -77,6 +77,7 @@ export default function VideoComponent(props : {channel : string , token : strin
         <div className=" h-full relative">
             <div className="h-52 w-52 absolute bottom-4 right-4">
                 <LocalVideoTrack track={localCameraTrack} play = {true}/>
+                <h3 className="text-white">{props.uid}</h3>
             </div>
         
         <div className={`grid  gap-1 flex-1`} style={{
@@ -92,6 +93,7 @@ export default function VideoComponent(props : {channel : string , token : strin
             {remoteUsers.map((remoteUser) => (
                     <div className="vid rounded-lg" style={{ height: 400, width: 600 }} key={remoteUser.uid}>
                         <RemoteUser user={remoteUser} playVideo={true} playAudio={true} />
+                        <div className="text-white">{remoteUser.uid}</div>
                     </div>
                 ))}
            </div>

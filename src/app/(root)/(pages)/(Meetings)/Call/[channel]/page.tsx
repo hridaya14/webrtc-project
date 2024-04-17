@@ -42,7 +42,7 @@ export default function Call({
 
       const data = {
         "channel": params.channel,
-        "uid": user.$id,
+        "uid": user.name,
         "expire": 3600
     };
 
@@ -107,7 +107,7 @@ export default function Call({
           <img src="/recording.png" alt="logo" />
         </span>
       </nav>
-      <VideoComponent channel = {params.channel} token = {token} uid = {user.$id} audioEnable = {isAudioEnable}  videoEnable={isVideoEnable} />
+      <VideoComponent channel = {params.channel} token = {token} uid = {user.name} audioEnable = {isAudioEnable}  videoEnable={isVideoEnable} />
       <footer className=" flex justify-between px-6">
         <div className="flex gap-2 items-center max-sm:hidden">
           <h2 className="text-white text-2xl">{timeString}</h2>

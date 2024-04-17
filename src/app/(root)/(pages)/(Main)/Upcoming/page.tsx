@@ -38,7 +38,7 @@ export default function Upcoming(){
     return (
        <div className="size-full grid grid-cols-3 gap-9 px-4">
             {meetings?.map((meeting : meeting)=> {
-                return <UpcomingCard title = {meeting.title} description = {meeting.description} time = {meeting.time} date = {meeting.date} meetingCode = {meeting.meetingCode} />
+                return <UpcomingCard key = {meeting.meetingCode} title = {meeting.title} description = {meeting.description} time = {meeting.time} date = {meeting.date} meetingCode = {meeting.meetingCode} />
             })}
        </div> 
     )
