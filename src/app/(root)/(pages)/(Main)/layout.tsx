@@ -14,7 +14,7 @@ const HomeLayout = ({
             <div className="flex lg:overflow-y-hidden h-[100vh] ">
                 <Sidebar/>
                 <section className=" flex min-h-screen flex-1 flex-col pt-24">
-                  <div className="w-full lg:overflow-y-scroll 2xl:overflow-y-hidden">{children}</div>
+                  <div className="w-full lg:overflow-y-scroll">{children}</div>
                 </section>
             </div>
         </main>

@@ -12,6 +12,7 @@ import {
     useRemoteUsers,
     IAgoraRTCRemoteUser,
     useRemoteAudioTracks,
+    LocalUser,
 } from "agora-rtc-react";
 import { useEffect } from "react";
 
@@ -62,13 +63,14 @@ export default function VideoComponent(props : {channel : string , token : strin
     if(remoteUsers.length == 0){
         return(
             <div className=" max-sm:h-[32rem] h-full w-full rounded-xl py-4 justify-center flex ">
-                <LocalVideoTrack track={localCameraTrack} play = {true} className="max-w-2xl h-full rounded-xl" />
+                <LocalVideoTrack track={localCameraTrack} play = {true} className="max-w-3xl h-full rounded-xl" />
             </div>
         )
     }
 
 
     const unit = "minmax(0, 1fr)";
+    
 
 
     return(

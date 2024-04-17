@@ -43,7 +43,7 @@ export const UpcomingMeeting =  ({uid} : {uid : string}) => {
       </span>
       <div className="flex flex-col gap-4 mt-4">
       {
-        meetings.length===0 ? <p className="text-2xl text-white my-auto">No Upcoming Meetings</p> : meetings.map((meeting: meeting) => {
+        meetings?.length===0 ? <p className="text-2xl text-white my-auto">No Upcoming Meetings</p> : meetings?.map((meeting: meeting) => {
           return <UpcomingCard key={meeting.title} title = {meeting.title} description = {meeting.description} time = {meeting.time} date = {meeting.date} meetingCode = {meeting.meetingCode} />
         })
       }
