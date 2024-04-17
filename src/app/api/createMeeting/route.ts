@@ -1,4 +1,4 @@
-// @ts-ignore
+
 import { config } from '@/conf/config';
 import { MongoClient, PushOperator } from 'mongodb';
 import { revalidatePath } from 'next/cache';
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
         const existingUser = await collection.findOne({ uid });
 
         if (existingUser) {
-            
+            // @ts-ignore
             await collection.updateOne(
                 { uid },
                 { $push: { meetings : meeting } } 
