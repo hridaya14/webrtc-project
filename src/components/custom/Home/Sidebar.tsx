@@ -15,7 +15,24 @@ import * as React from "react"
 
 import { Calendar } from "@/components/ui/calendar"
 import { account } from "@/appwrite/config";
-import { generateRandomChannelName } from "@/app/(root)/(pages)/(Meetings)/Create-Meeting/page";
+
+
+function generateRandomChannelName() {
+  const getRandomChar = () => {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      return characters.charAt(Math.floor(Math.random() * characters.length));
+  };
+
+  let channelName = '';
+  for (let i = 0; i < 12; i++) {
+      if (i > 0 && i % 4 === 0) {
+          channelName += '-';
+      }
+      channelName += getRandomChar();
+  }
+  return channelName;
+}
+
 
 
 const Sidebar = () => {

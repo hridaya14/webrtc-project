@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { redirect } from "next/navigation";
 
 
-export function generateRandomChannelName() {
+function generateRandomChannelName() {
     const getRandomChar = () => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         return characters.charAt(Math.floor(Math.random() * characters.length));
