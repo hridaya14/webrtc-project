@@ -9,7 +9,10 @@ import { Models } from "appwrite";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { LocalUser, useRemoteUsers } from "agora-rtc-react";
 const VideoComponent = dynamic(() => import("@/components/custom/Meetings/VideoComponent"),{ssr:false});
+const ChatComponent = dynamic(() => import("@/components/custom/Meetings/ChatComponent"),{ssr:false});
+const ParticipantsComponent = dynamic(() => import("@/components/custom/Meetings/ParticipantsComponent"),{ssr:false});
 
 export default function Call({
   params,
@@ -21,6 +24,8 @@ export default function Call({
   const [loading , setLoading] = useState(false);
   const [user , setUser] = useState<Models.Preferences>({});
   const router = useRouter();
+  const [isChatOpen,setIsChatOpen] = useState(false);
+  const [isParticipants,setIsParticipants] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -88,6 +93,20 @@ export default function Call({
     setIsVideoEnable(!isVideoEnable);
   };
 
+  const handleChat = () =>  {
+    if (isParticipants){
+      setIsParticipants(false);
+    }
+    setIsChatOpen(!isChatOpen);
+  }
+
+  const handleParticipants = () =>  {
+    if (isChatOpen){
+      setIsChatOpen(false);
+    }
+    setIsParticipants(!isParticipants);
+  }
+
   if(loading){
     return <Loading/>
   }
@@ -107,7 +126,12 @@ export default function Call({
           <img src="/recording.png" alt="logo" />
         </span>
       </nav>
-      <VideoComponent channel = {params.channel} token = {token} uid = {user.name} audioEnable = {isAudioEnable}  videoEnable={isVideoEnable} />
+      <section className="size-full relative py-4">
+        <VideoComponent channel = {params.channel} token = {token} uid = {user.name} audioEnable = {isAudioEnable}  videoEnable={isVideoEnable} />
+        {isChatOpen ? <ChatComponent uid = {user.name} /> : null}
+        {isParticipants ? <ParticipantsComponent uid = {user.name} /> : null}
+      </section>
+      
       <footer className=" flex justify-between px-6">
         <div className="flex gap-2 items-center max-sm:hidden">
           <h2 className="text-white text-2xl">{timeString}</h2>
@@ -126,10 +150,10 @@ export default function Call({
           </button>
         </div>
         <div className="flex gap-2">
-          <button className="p-2 footer-button ">
+          <button className="p-2 footer-button " onClick={handleChat}>
             <img src="/footer/chat.png"></img>
           </button>
-          <button className="p-2 footer-button">
+          <button className="p-2 footer-button" onClick={handleParticipants}>
             <img src="/footer/participants.png"></img>
           </button>
         </div>
