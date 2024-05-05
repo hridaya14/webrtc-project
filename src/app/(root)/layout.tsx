@@ -6,6 +6,7 @@ import { Loading } from "@/components/custom/Loading";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 
+
 const ProtectedLayout = ({
   children,
 }: {
@@ -17,7 +18,8 @@ const ProtectedLayout = ({
   useEffect(() => {
     account
       .get()
-      .then(() => setAuthStatus(true))
+      .then(() => {setAuthStatus(true)
+      })
       .catch(() => setAuthStatus(false))
       .finally(() => setLoader(false));
   }, []);

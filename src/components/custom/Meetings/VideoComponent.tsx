@@ -14,7 +14,7 @@ import {
     useRemoteAudioTracks,
     LocalUser,
 } from "agora-rtc-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function VideoComponent(props : {channel : string , token : string , uid : string ,  audioEnable : boolean , videoEnable : boolean}) {
 
@@ -23,6 +23,9 @@ export default function VideoComponent(props : {channel : string , token : strin
     const remoteUsers = useRemoteUsers();
     const { audioTracks } = useRemoteAudioTracks(remoteUsers);
     audioTracks.map((track) => track.play());
+
+    const [gridView, setGridView] = useState(true); 
+
 
     useEffect(() => {
         if (props.audioEnable) {
@@ -68,37 +71,26 @@ export default function VideoComponent(props : {channel : string , token : strin
         )
     }
 
-
-    const unit = "minmax(0, 1fr)";
-    
-
-
-    return(
-        <div className=" h-full relative">
-            <div className="h-52 w-52 absolute bottom-4 right-4">
-                <LocalVideoTrack track={localCameraTrack} play = {true}/>
-                <h3 className="text-white">{props.uid}</h3>
+    return (
+        <div className="h-full relative">
+            <div className="absolute top-4 right-4 z-20">
+                <button onClick={() => setGridView(!gridView)}>Toggle View</button>
             </div>
-        
-        <div className={`grid  gap-1 flex-1`} style={{
-            gridTemplateColumns:
-                remoteUsers.length > 9
-                ? unit.repeat(4)
-                : remoteUsers.length > 4
-                ? unit.repeat(3)
-                : remoteUsers.length > 1
-                ? unit.repeat(2)
-                : unit,
-        }}>
-            {remoteUsers.map((remoteUser) => (
-                    <div className="vid rounded-lg" style={{ height: 400, width: 600 }} key={remoteUser.uid}>
+            <div className="grid gap-1 flex-1 mx-auto" style={{
+                gridTemplateColumns: gridView ? `repeat(3, minmax(0, 1fr))` : `minmax(0, 1fr)`,
+            }}>
+                {remoteUsers.map((remoteUser, index) => (
+                    <div className="vid rounded-lg relative" style={{ height: 400, width: 600 }} key={remoteUser.uid}>
                         <RemoteUser user={remoteUser} playVideo={true} playAudio={true} />
-                        <div className="text-white">{remoteUser.uid}</div>
+                        <div className="absolute bottom-4 right-4 z-20 text-white">{remoteUser.uid}</div>
                     </div>
                 ))}
-           </div>
-            
+                <div className="vid rounded-lg " style={{ height: 400, width: 600 }}>
+                    <LocalVideoTrack track={localCameraTrack} play={true} className="h-full w-full rounded-xl absolute bottom-4 right-4" />
+                    <div className="absolute bottom-4 right-4 z-20 text-white">{props.uid}</div>
+                </div>
+            </div>
         </div>
-    )
-    
+    );
 }
+    

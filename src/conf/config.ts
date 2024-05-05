@@ -5,4 +5,7 @@ export const config = {
     Certificate : String(process.env.NEXT_PUBLIC_APP_CERTIFICATE),
     App_ID : String(process.env.NEXT_PUBLIC_APP_ID),
     MongoDB_URI : String(process.env.NEXT_PUBLIC_MONGODB_URI),
+    PUBLISH_KEY : String(process.env.NEXT_PUBLIC_PUBLISH_KEY),
+    SUBSCRIBE_KEY : String(process.env.NEXT_PUBLIC_SUBSCRIBE_KEY),
+
 }

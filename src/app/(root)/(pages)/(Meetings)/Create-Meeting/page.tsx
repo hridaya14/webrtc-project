@@ -1,10 +1,11 @@
 "use client";
 import { account } from "@/appwrite/config";
-import { Models } from "appwrite";
+
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
+
 import { redirect } from "next/navigation";
+import { isAdmin } from "@/atoms/admin";
+import { useSetRecoilState } from "recoil";
 
 
 function generateRandomChannelName() {
@@ -25,9 +26,11 @@ function generateRandomChannelName() {
 
 export default function Create() {
     const [channel, setChannel] = useState("");
+    const setIsAdmin = useSetRecoilState(isAdmin);
     
     useEffect(() => {
         const channel = generateRandomChannelName();
+        setIsAdmin(true);
         setChannel(channel);
         redirect(`/Call/${channel}`);
     }, []);

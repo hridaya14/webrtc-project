@@ -4,6 +4,7 @@ import useAuth from "@/context/useAuth"
 import { useRouter } from "next/navigation"
 
 import React from "react"
+import { RecoilRoot } from "recoil";
 
 const ProtectedLayout = ({
     children,
@@ -20,7 +21,9 @@ const ProtectedLayout = ({
     }
     return (
         <Providers>
+          <RecoilRoot>
             {children}
+          </RecoilRoot>
         </Providers>
       
       )

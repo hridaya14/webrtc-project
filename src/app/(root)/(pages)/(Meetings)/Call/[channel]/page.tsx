@@ -2,17 +2,18 @@
 import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import dynamic from "next/dynamic";
-import { account } from "@/appwrite/config";
+import { account, avatars } from "@/appwrite/config";
 import axios from "axios";
 import { Loading } from "@/components/custom/Loading";
 import { Models } from "appwrite";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LocalUser, useRemoteUsers } from "agora-rtc-react";
 const VideoComponent = dynamic(() => import("@/components/custom/Meetings/VideoComponent"),{ssr:false});
 const ChatComponent = dynamic(() => import("@/components/custom/Meetings/ChatComponent"),{ssr:false});
 const ParticipantsComponent = dynamic(() => import("@/components/custom/Meetings/ParticipantsComponent"),{ssr:false});
+import { isAdmin } from "@/atoms/admin";
+import { useRecoilValue } from "recoil";
+
 
 export default function Call({
   params,
@@ -26,6 +27,8 @@ export default function Call({
   const router = useRouter();
   const [isChatOpen,setIsChatOpen] = useState(false);
   const [isParticipants,setIsParticipants] = useState(false);
+  const isHost = useRecoilValue(isAdmin);
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -72,8 +75,11 @@ export default function Call({
 
 
     fetchToken();
-  
+    
+    
   },[]);
+
+
 
   const timeString = currentTime.toLocaleTimeString("en-US", {
     hour: "2-digit",
@@ -98,6 +104,10 @@ export default function Call({
       setIsParticipants(false);
     }
     setIsChatOpen(!isChatOpen);
+  }
+
+  const handleExit = () => {
+    router.push("/");
   }
 
   const handleParticipants = () =>  {
@@ -128,7 +138,7 @@ export default function Call({
       </nav>
       <section className="size-full relative py-4">
         <VideoComponent channel = {params.channel} token = {token} uid = {user.name} audioEnable = {isAudioEnable}  videoEnable={isVideoEnable} />
-        {isChatOpen ? <ChatComponent uid = {user.name} /> : null}
+        {isChatOpen ? <ChatComponent uid = {user.name} channel = {params.channel} /> : null}
         {isParticipants ? <ParticipantsComponent uid = {user.name} /> : null}
       </section>
       
@@ -145,7 +155,7 @@ export default function Call({
           <button className={cn("p-2 footer-button",{"footer-off" : !isVideoEnable})} onClick={ toggleVideo}>
             <img src={isVideoEnable ? "/footer/video-on.png" : "/footer/video-off.png"}></img>
           </button>
-          <button className=" p-2 bg-red-800 footer-button" onClick={() => {router.push("/")}}>
+          <button className=" p-2 bg-red-800 footer-button" onClick={handleExit}>
             <img src="/footer/exit.png"></img>
           </button>
         </div>
