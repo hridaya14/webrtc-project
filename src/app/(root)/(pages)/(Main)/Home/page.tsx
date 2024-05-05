@@ -5,20 +5,9 @@ import HomeCard from "@/components/custom/Home/HomeCard";
 
 import { account } from "@/appwrite/config";
 import { useEffect, useState } from "react";
-import Pubnub from "pubnub";
-import { config } from "@/conf/config";
 
-var pubnub : Pubnub;
 
-const initializePubnub = async () => {
-  const user = await account.get();
-  const uid = user.$id;
-  pubnub = new Pubnub({
-    publishKey: config.PUBLISH_KEY,
-    subscribeKey: config.SUBSCRIBE_KEY,
-    uuid: uid,
-  });
-}
+
 
 
 export default function Home() {
@@ -31,7 +20,6 @@ export default function Home() {
       setLoading(false)
     }
     fetchUid();
-    initializePubnub();
   }, []);
   
   if(loading){
@@ -48,4 +36,4 @@ export default function Home() {
   );
 }
 
-export { pubnub };
+
