@@ -3,6 +3,17 @@ import { account, avatars } from "@/appwrite/config";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import UserProfile from "./UserProfile";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import Sidebar from "./Sidebar";
+import MobileSidebar from "./MobileSidebar";
+
 
 const Navbar = () => {
     const [avatar , setAvatar] = useState<string>("")
@@ -26,8 +37,9 @@ const Navbar = () => {
     }, [])
     
   return (
-    <nav className=" text-white bg-[#1C1F2E]  z-50 px-6 py-4 w-full flex justify-between items-center fixed">
-      <span>
+    <nav className=" text-white z-50 bg-[#1C1F2E] px-6 py-4 w-full flex justify-between items-center fixed">
+      <span className="flex">
+        <MobileSidebar/>
         <Image
           src="/logo-no-background.svg"
           alt="Logo"
@@ -35,8 +47,9 @@ const Navbar = () => {
           height={80}
         ></Image>
       </span>
-      <span>
+      <span className="flex gap-1">
         <UserProfile avatar={avatar} devices = {devices} email = {email}></UserProfile>
+        
       </span>
     </nav>
   );

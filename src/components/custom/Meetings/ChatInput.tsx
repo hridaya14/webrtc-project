@@ -18,15 +18,15 @@ export const ChatInput = ({channel , client, name} : {channel : string , client 
     };
   
     return (
-      <span className=" bg-white rounded-xl p-2 w-full flex justify-between">
+      <div className=" w-full input-box p-4 flex justify-between relative">
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message here"
-          className="bg-white"
+          className="w-full max-w-[20rem] bg-inherit text-white"
         />
-        <button onClick={sendMessage}>Send</button>
-      </span>
+        <button className=" absolute right-4" onClick={sendMessage}><img src = "/ui/submit-button.svg" alt = "send"></img></button>
+      </div>
     );
   };

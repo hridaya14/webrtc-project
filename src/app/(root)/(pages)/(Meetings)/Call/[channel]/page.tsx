@@ -148,7 +148,7 @@ export default function Call({
   }
 
   return (
-    <main className="h-full flex flex-col justify-between py-4">
+    <main className="h-full flex flex-col justify-between py-4 max-sm:py-2">
       <nav className="p-2 flex justify-between items-center">
         <span className="flex gap-2">
           <img src="/logo.png" alt="logo" width={32} height={32} />
@@ -165,11 +165,11 @@ export default function Call({
       </section>
       
       <footer className="flex justify-between px-6">
-        <div className="flex gap-2 items-center max-sm:hidden">
-          <h2 className="text-white text-2xl">{timeString}</h2>
+        <span className="flex gap-2 py-2 items-center max-sm:hidden">
+          <h2 className="text-white text-xl">{timeString}</h2>
           <Separator orientation="vertical" />
-          <h2 className="text-white text-2xl">{params.channel}</h2>
-        </div>
+          <h2 className="text-white text-xl">{params.channel}</h2>
+        </span>
         <div className="flex gap-2 md:pr-8">
           <button className={cn("p-2 footer-button",{"footer-off" : !isAudioEnable})} onClick={toggleAudio}>
             <img src={isAudioEnable ? "/footer/mic-on.png" : "/footer/mic-off.png"} alt="mic"></img>

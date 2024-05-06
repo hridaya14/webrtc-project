@@ -266,3 +266,35 @@
         animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
    }
 }
+
+.toggle-box{
+    border-radius: var(--Radius-2, 16px);
+    background: var(--Surface-Dim, #11131C);
+    background: var(--Surface-Dim, color(display-p3 0.0667 0.0745 0.102));
+}
+.input-box{
+    border-radius: 8px;
+    background: var(--Surface-Default, #191B25);
+    background: var(--Surface-Default, color(display-p3 0.098 0.1059 0.1373));
+}
+
+@media screen and (min-width: 1025px) {
+    .mobile-nav{
+        display:none;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .mobile-nav{
+        position : fixed;
+        display:flex;
+        flex-direction: column;
+        gap: var(--gap , 3rem);
+        inset: 0 10% 0 0;
+        background-color: steelblue;
+        padding : min(20vh , 12rem) 2rem ;
+        background : #1C1F2E;
+        backdrop-filter : blur(2rem);
+        z-index: 999;
+    }
+}

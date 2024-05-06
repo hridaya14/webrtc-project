@@ -7,7 +7,7 @@ export default function ParticipantsComponent({uid} : {uid : string}){
     }
     
     return(
-        <div className="h-[90%] z-50 max-w-md w-full absolute bg-[#333333] bottom-2 right-8 rounded-xl p-3">
+        <div className="h-[90%] z-50 max-w-md w-full absolute max-sm:right-0 max-sm:bottom-4 bottom-2 right-8 toggle-box p-3">
             <h2 className="text-2xl text-white">People</h2>
             <ul className="flex flex-col gap-4 py-6 overflow-y-scroll">
                 <li className="flex gap-2 text-white">
