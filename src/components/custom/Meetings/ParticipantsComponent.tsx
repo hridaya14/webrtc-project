@@ -16,7 +16,7 @@ export default function ParticipantsComponent({uid} : {uid : string}){
                 </li>
                 {remoteUsers.map((user) => {
                     return (
-                        <li className="flex gap-2 text-white">
+                        <li className="flex gap-2 text-white" key = {user.uid}>
                             <span><img src = {`${generateAvatar(String(user.uid))}`} className=" h-8 w-8 rounded-full"></img></span>
                             <span className="text-lg">{user.uid}</span>
                         </li>
