@@ -10,7 +10,7 @@ import { OAuthProvider } from "appwrite"
 export default function Signup(){
   function handleGoogleOAuth ()  {
     try{
-    account.createOAuth2Session(OAuthProvider.Google , "http://localhost:3000/Home" , "https://localhost:3000/Auth/Signup");
+    account.createOAuth2Session(OAuthProvider.Google , "https://webrtc-project-six.vercel.app/Home" , "https://webrtc-project-six.vercel.app/Auth/Signup");
     
     }
     catch(error){
@@ -19,7 +19,7 @@ export default function Signup(){
 }
   function handleGithubOAuth() {
     try{
-        account.createOAuth2Session(OAuthProvider.Github, "http://localhost:3000/Home", "https://localhost:3000/Auth/Signup");
+        account.createOAuth2Session(OAuthProvider.Github, "https://webrtc-project-six.vercel.app/Home" , "https://webrtc-project-six.vercel.app/Auth/Signup");
     }
     catch(error){
         console.error(error);

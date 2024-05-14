@@ -10,7 +10,7 @@ import LoginForm from "./form";
 export default function Login() {
   function handleGoogleOAuth ()  {
     try{
-    account.createOAuth2Session(OAuthProvider.Google , "http://localhost:3000/" , "https://localhost:3000/Auth/Signup");
+    account.createOAuth2Session(OAuthProvider.Google , "https://webrtc-project-six.vercel.app/Home" , "https://webrtc-project-six.vercel.app/Auth/Signup");
     
     }
     catch(error){
@@ -19,7 +19,7 @@ export default function Login() {
 }
   function handleGithubOAuth() {
     try{
-        account.createOAuth2Session(OAuthProvider.Github, "http://localhost:3000/", "https://localhost:3000/Auth/Signup");
+        account.createOAuth2Session(OAuthProvider.Github, "https://webrtc-project-six.vercel.app/Home" , "https://webrtc-project-six.vercel.app/Auth/Signup");
     }
     catch(error){
         console.error(error);
