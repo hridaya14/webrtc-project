@@ -1,5 +1,6 @@
 "use client";
 import { Providers } from "@/app/providers"
+import { Loading } from "@/components/custom/Loading";
 import useAuth from "@/context/useAuth"
 import { useRouter } from "next/navigation"
 
@@ -17,7 +18,7 @@ const ProtectedLayout = ({
 
     if (!authStatus) {
         router.replace("/Login");
-        return <></>;
+        return <Loading/>;
     }
     return (
         <Providers>
