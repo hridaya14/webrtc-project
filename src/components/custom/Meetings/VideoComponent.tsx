@@ -15,6 +15,7 @@ import {
     LocalUser,
 } from "agora-rtc-react";
 import { useEffect, useState } from "react";
+import { Loading } from "../Loading";
 
 export default function VideoComponent(props : {channel : string , token : string , uid : string ,  audioEnable : boolean , videoEnable : boolean}) {
 
@@ -60,7 +61,7 @@ export default function VideoComponent(props : {channel : string , token : strin
    
 
     if (isLoadingMic || isLoadingCam) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     if(remoteUsers.length == 0){

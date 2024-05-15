@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/atoms/admin";
 import { useSetRecoilState } from "recoil";
+import { Loading } from "@/components/custom/Loading";
 
 
 function generateRandomChannelName() {
@@ -40,5 +41,5 @@ export default function Create() {
         return <h1>Loading...</h1>;
     }
 
-    return null;
+    return <Loading/>
 }
