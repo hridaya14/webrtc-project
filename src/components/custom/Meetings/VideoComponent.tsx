@@ -81,12 +81,12 @@ export default function VideoComponent(props : {channel : string , token : strin
                 gridTemplateColumns: gridView ? `repeat(3, minmax(0, 1fr))` : `minmax(0, 1fr)`,
             }}>
                 {remoteUsers.map((remoteUser, index) => (
-                    <div className="vid rounded-lg relative" style={{ height: 400, width: 600 }} key={remoteUser.uid}>
+                    <div className="max-sm:h-[32rem] h-full w-full rounded-xl py-4 mx-auto max-w-3xl relative" style={{ height: 400, width: 600 }} key={remoteUser.uid}>
                         <RemoteUser user={remoteUser} playVideo={true} playAudio={true} />
                         <div className="absolute bottom-4 right-4 z-20 text-white">{remoteUser.uid}</div>
                     </div>
                 ))}
-                <div className="vid rounded-lg " style={{ height: 400, width: 600 }}>
+                <div className="vid rounded-lg h-20 w-20  ">
                     <LocalVideoTrack track={localCameraTrack} play={true} className="h-full w-full rounded-xl absolute bottom-4 right-4" />
                     <div className="absolute bottom-4 right-4 z-20 text-white">{props.uid}</div>
                 </div>
